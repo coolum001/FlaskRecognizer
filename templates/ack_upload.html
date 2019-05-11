@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Upload Details</h1>
+
+<div>
+    You sucessfully uploaded a file: {{filename}}<br>
+    File upload count: {{uploadcount}}
+</div>
+<p>
+    <form action="/" method="get" novalidate>
+        {{form.submit() }}
+    </form>
+</p>
+
+{% endblock %}
