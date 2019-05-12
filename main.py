@@ -19,6 +19,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 
+
 # home page
 @app.route('/')
 @app.route('/index')
@@ -86,18 +87,23 @@ def upload_file():
         # end if
         if file and allowed_extension(file.filename):
             filename = secure_filename(file.filename)
-            if ('upload_count' in session):
+            if 'upload_count' in session:
                 session['upload_count'] = session['upload_count'] + 1
             else:
                 session['upload_count'] = 1
-            #end if
+            # end if
             flash('Loading .. ' + filename)
             flash('Saving to ' + app.config['UPLOAD_FOLDER'])
             filename = file.filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             form = ResponseForm()
-            return render_template('ack_upload.html', form=form, filename=filename, uploadcount=str(session['upload_count']) )
+            return render_template(
+                'ack_upload.html',
+                form=form,
+                filename=filename,
+                uploadcount=str(session['upload_count']),
+            )
         # end if
     # end if
     return render_template('upload.html', title='Upload File')
@@ -115,5 +121,5 @@ def uploaded_file(filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_evalex=False)
+    app.run(debug=False, use_evalex=False)
 # end if
