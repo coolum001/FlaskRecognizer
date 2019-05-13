@@ -24,18 +24,13 @@ app.config.from_object(Config)
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'username': 'Everyman'}
-    posts = [
-        {'author': {'username': 'John'}, 'body': 'Blog post 1'},
-        {'author': {'username': 'Anon'}, 'body': 'Blog post 2'},
-    ]
 
-    return render_template('index.html', user=user, posts=posts)
+    return render_template('index.html')
 
 
 # end index
 
-# login page
+# login page - not yet used
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
